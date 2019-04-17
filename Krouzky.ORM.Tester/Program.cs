@@ -1,4 +1,4 @@
-﻿namespace Krouzky.ORM
+﻿namespace Krouzky.ORM.Tester
 {
     #region UsingRegion
 

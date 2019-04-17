@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27428.2043
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Krouzky.ORM", "Krouzky.ORM\Krouzky.ORM.csproj", "{28CBE73F-9BF8-4A0C-9081-A9380C6DB7A0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Krouzky.ORM.Tester", "Krouzky.ORM.Tester\Krouzky.ORM.Tester.csproj", "{99E9CD5D-AB41-42C8-A890-4EE34C0F3189}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{28CBE73F-9BF8-4A0C-9081-A9380C6DB7A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28CBE73F-9BF8-4A0C-9081-A9380C6DB7A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28CBE73F-9BF8-4A0C-9081-A9380C6DB7A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99E9CD5D-AB41-42C8-A890-4EE34C0F3189}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99E9CD5D-AB41-42C8-A890-4EE34C0F3189}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99E9CD5D-AB41-42C8-A890-4EE34C0F3189}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99E9CD5D-AB41-42C8-A890-4EE34C0F3189}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
