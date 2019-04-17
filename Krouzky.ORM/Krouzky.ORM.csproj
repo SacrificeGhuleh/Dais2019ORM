@@ -8,9 +8,25 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>Krouzky.ORM</RootNamespace>
     <AssemblyName>Krouzky.ORM</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -30,9 +46,14 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -42,11 +63,55 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Database\DAO\DAO.cs" />
+    <Compile Include="Database\DTO\Adresa.cs" />
+    <Compile Include="Database\DAO\AdresaTable.cs" />
+    <Compile Include="Database\Database.cs" />
+    <Compile Include="Database\DAO\HodinovaMzdaTable.cs" />
+    <Compile Include="Database\DAO\KalendarTable.cs" />
+    <Compile Include="Database\DAO\KonkretniKrouzekTable.cs" />
+    <Compile Include="Database\DAO\KontaktniOsobaTable.cs" />
+    <Compile Include="Database\DAO\KrouzekTable.cs" />
+    <Compile Include="Database\DAO\Table.cs" />
+    <Compile Include="Database\DAO\LektorTable.cs" />
+    <Compile Include="Database\DAO\OsobaTable.cs" />
+    <Compile Include="Database\DAO\PravidelnostTable.cs" />
+    <Compile Include="Database\DAO\SkolaTable.cs" />
+    <Compile Include="Database\DAO\VyucujiciKrouzekTable.cs" />
+    <Compile Include="Database\DTO\DenVTydnu.cs" />
+    <Compile Include="Database\DAO\DenVTydnuTable.cs" />
+    <Compile Include="Database\DTO\DTO.cs" />
+    <Compile Include="Database\DTO\HodinovaMzda.cs" />
+    <Compile Include="Database\DTO\Connectable.cs" />
+    <Compile Include="Database\DTO\Kalendar.cs" />
+    <Compile Include="Database\DTO\KonkretniKrouzek.cs" />
+    <Compile Include="Database\DTO\KonkretniKrouzekPrototype.cs" />
+    <Compile Include="Database\DTO\KontaktniOsoba.cs" />
+    <Compile Include="Database\DTO\Krouzek.cs" />
+    <Compile Include="Database\DTO\Lektor.cs" />
+    <Compile Include="Database\DTO\Osoba.cs" />
+    <Compile Include="Database\DTO\Pravidelnost.cs" />
+    <Compile Include="Database\DTO\Skola.cs" />
+    <Compile Include="Database\DTO\VyucujiciKrouzek.cs" />
+    <Compile Include="ORM.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
