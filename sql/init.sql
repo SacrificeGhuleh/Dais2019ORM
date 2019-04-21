@@ -1983,4 +1983,4 @@ INSERT INTO projekt.KonkretniKrouzek(idKrouzek,datum,zrusen,pocetZaku) VALUES (8
 INSERT INTO projekt.KonkretniKrouzek(idKrouzek,datum,zrusen,pocetZaku) VALUES (16, '2019-04-16', 0, 7);
 INSERT INTO projekt.KonkretniKrouzek(idKrouzek,datum,zrusen,pocetZaku) VALUES (6, '2019-04-18', 0, 9);
 INSERT INTO projekt.KonkretniKrouzek(idKrouzek,datum,zrusen,pocetZaku) VALUES (12, '2019-04-18', 0, 6);
-INSERT INTO projekt.KonkretniKrouzek(idKrouzek,datum,zrusen,pocetZaku) VALUES (3, '2019-04-19', 0, 8);
+--INSERT INTO projekt.KonkretniKrouzek(idKrouzek,datum,zrusen,pocetZaku) VALUES (3, '2019-04-19', 0, 8);

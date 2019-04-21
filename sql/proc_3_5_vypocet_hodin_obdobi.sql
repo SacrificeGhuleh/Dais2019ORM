@@ -82,6 +82,7 @@ BEGIN
         ROLLBACK;
         PRINT 'PROJEKT.PROC_3_5_VYPOCET_HODIN_OBDOBI exception'
         SET @PO_HODINCELKEM = 0;
+        THROW;
     END CATCH
 END
 GO

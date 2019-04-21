@@ -33,6 +33,7 @@ BEGIN
                 PRINT 'V zadany den se krouzek nekona';
                 --SET @V_RET = -1;
                 --THROW;
+                ROLLBACK;
                 RETURN -1;
             END
 
@@ -44,6 +45,7 @@ BEGIN
                         PRINT 'Nespravna pravidelnost';
                         --SET @V_RET = -2;
                         --THROW;
+                        ROLLBACK;
                         RETURN -2;
                     END
             END
@@ -58,6 +60,7 @@ BEGIN
                 PRINT 'Konkretni krouzek uz existuje';
                 --SET @V_RET = -3;
                 --THROW;
+                ROLLBACK;
                 RETURN -3;
             END
 
@@ -68,7 +71,8 @@ BEGIN
     END TRY
     BEGIN CATCH
         ROLLBACK;
-        PRINT 'PROJEKT.PROC_7_1_NAPLANOVANY_NA_PROBEHLY exception'
+        PRINT 'PROJEKT.PROC_7_1_NAPLANOVANY_NA_PROBEHLY exception';
+        THROW;
         --RETURN @V_RET;
     END CATCH
 END

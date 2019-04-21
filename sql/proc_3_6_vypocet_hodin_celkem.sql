@@ -76,6 +76,7 @@ BEGIN
         ROLLBACK;
         PRINT 'PROJEKT.PROC_3_6_VYPOCET_HODIN_CELKEM exception'
         SET @PO_HODINCELKEM = 0;
+        THROW;
     END CATCH
 END
 GO

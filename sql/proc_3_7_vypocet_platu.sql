@@ -68,6 +68,7 @@ BEGIN
         ROLLBACK;
         PRINT 'PROJEKT.PROC_3_7_VYPOCET_PLATU exception'
         SET @PO_MESICNIPLAT = 0;
+        THROW;
     END CATCH
 END
 GO

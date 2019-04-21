@@ -89,6 +89,8 @@ BEGIN
                   @P_POCETZAKU
 END
 
+    rollback;
+
 /**
 Procedura 9.4. zvyseni mzdy lektorovi
 */
@@ -104,6 +106,7 @@ BEGIN
                   @P_IDLEKTOR,
                   @P_PLATNOSTOD
 END
+
 
 
 /**

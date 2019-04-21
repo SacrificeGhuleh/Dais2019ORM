@@ -15,8 +15,23 @@
 
             var orm = ORM.instance;
 
-            orm.calculateHoursInPeriod(DateTime.Parse("2018-01-01"), DateTime.Parse("2018-01-31"), 0);
+            try {
+                orm.calculateHoursInPeriod(DateTime.Parse("2019-01-01"), DateTime.Parse("2019-01-31"), 0);
+            }
+            catch (Exception e) {
+                Console.WriteLine(e);
+            }
 
+            for (int i = 0; i < 10; i++) {
+                try {
+                    orm.calculateHoursTotal(i);
+                }
+                catch (Exception e) {
+                    Console.WriteLine(e);
+                }
+            }
+
+/*
             orm.calculateHoursTotal(0);
             orm.calculateHoursTotal(1);
             orm.calculateHoursTotal(2);
@@ -24,28 +39,66 @@
             orm.calculateHoursTotal(4);
             orm.calculateHoursTotal(5);
             orm.calculateHoursTotal(6);
+*/
+            try {
+                orm.calculateSalary(DateTime.Parse("2019-01-01"), DateTime.Parse("2019-01-31"), 0);
+            }
+            catch (Exception e) {
+                Console.WriteLine(e);
+            }
 
-            orm.calculateSalary(DateTime.Parse("2018-01-01"), DateTime.Parse("2018-01-31"), 0);
+            try {
+                orm.getPlannedAndPassed(DateTime.Parse("2019-04-15"), DateTime.Parse("2019-04-22"),
+                    DateTime.Today);
+            }
+            catch (Exception e) {
+                Console.WriteLine(e);
+            }
 
-            orm.getPlannedAndPassed(DateTime.Parse("2018-05-01"), DateTime.Parse("2018-05-20"),
-                DateTime.Parse("2018-05-15"));
-            orm.promotePlannedToPassed(4, DateTime.Parse("2018-05-08"), false, 5);
-            orm.getPlannedAndPassed(DateTime.Parse("2018-05-01"), DateTime.Parse("2018-05-20"),
-                DateTime.Parse("2018-05-15"));
+            try {
+                orm.promotePlannedToPassed(3, DateTime.Parse("2019-04-19"), false, 5);
+            }
+            catch (Exception e) {
+                Console.WriteLine(e);
+            }
 
+            try {
+                orm.getPlannedAndPassed(DateTime.Parse("2019-04-15"), DateTime.Parse("2019-04-22"),
+                    DateTime.Today);
+            }
+            catch (Exception e) {
+                Console.WriteLine(e);
+            }
+//
+//            try {
+//                var krouzky =
+//                    orm.getPlannedAndPassed(DateTime.Parse("2018-01-01"), DateTime.Parse("2019-04-20"), DateTime.Now);
+//                foreach (var planned in krouzky.Item1) {
+//                    Console.WriteLine(ORM.InsertString(planned));
+//                }
+//            }
+//            catch (Exception e) {
+//                Console.WriteLine(e);
+//            }
 
-            var krouzky =
-                orm.getPlannedAndPassed(DateTime.Parse("2018-01-01"), DateTime.Parse("2019-04-20"), DateTime.Now);
+            try {
+                Console.WriteLine("Prvni pokus o zvyseni mzdy");
+                Console.WriteLine("Zvyseni mzdy: {0}", orm.salaryUpdate(4, DateTime.Today));
+            }
+            catch (Exception e) {
+                Console.WriteLine(e);
+            }
 
-            /*foreach (var planned in krouzky.Item1) {
-                Console.WriteLine(ORM.InsertString(planned));
-            }*/
-
-            Console.WriteLine("Prvni pokus o zvyseni mzdy");
-            Console.WriteLine("Zvyseni mzdy: {0}", orm.salaryUpdate(4, DateTime.Parse("2018-05-05")));
             Console.WriteLine();
-            Console.WriteLine("Druhy pokus o zvyseni mzdy");
-            Console.WriteLine("Zvyseni mzdy: {0}", orm.salaryUpdate(4, DateTime.Parse("2018-05-05")));
+
+            try {
+                Console.WriteLine("Druhy pokus o zvyseni mzdy");
+                Console.WriteLine("Zvyseni mzdy: {0}", orm.salaryUpdate(4, DateTime.Today));
+            }
+            catch (Exception e) {
+                Console.WriteLine(e);
+//                throw;
+            }
         }
     }
 }

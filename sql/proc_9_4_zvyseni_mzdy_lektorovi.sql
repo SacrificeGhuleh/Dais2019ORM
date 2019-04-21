@@ -3,6 +3,7 @@ AS
 BEGIN
     BEGIN TRY
         BEGIN TRANSACTION;
+
         DECLARE
             @V_POCETZAZNAMU INTEGER = 0;
         DECLARE
@@ -13,7 +14,6 @@ BEGIN
             @V_HODNOTAZVYSENI INTEGER = 0;
         DECLARE
             @V_NAROKNAZVYSENI BIT = 0;
-
         DECLARE
             @V_OLD_HODINOVAMZDA_ID INTEGER;
         DECLARE
@@ -53,6 +53,7 @@ BEGIN
         IF (@V_NAROKNAZVYSENI = 0)
             BEGIN
                 PRINT 'Neni narok na zvyseni';
+                ROLLBACK;
                 RETURN -1;
             END
 
@@ -80,6 +81,7 @@ BEGIN
     BEGIN CATCH
         ROLLBACK;
         PRINT 'PROJEKT.PROC_9_4_ZVYSENI_MZDY_LEKTOROVI exception';
+        THROW;
     END CATCH
 END
 GO
