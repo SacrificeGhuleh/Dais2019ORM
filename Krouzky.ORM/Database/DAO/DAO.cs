@@ -1,17 +1,15 @@
-﻿using System;
+﻿#region UsingRegion
 
-namespace Krouzky.ORM.Database.DAO
-{
-    public class DAO
-    {
-        public DAO()
-        {
+using System;
+
+#endregion
+
+namespace Krouzky.ORM.Database.DAO {
+    public class DAO {
+        public DAO() {
             this.db = new Database();
             //this.db.Connect();
-            if (!this.db.Connect())
-            {
-                throw new Exception("Nelze se pripojit k databazi.");
-            }
+            if (!this.db.Connect()) throw new Exception("Nelze se pripojit k databazi.");
 
             this.adresaTable = new AdresaTable();
             this.denVTydnuTable = new DenVTydnuTable();

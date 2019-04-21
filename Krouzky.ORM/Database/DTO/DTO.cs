@@ -1,17 +1,17 @@
-﻿namespace Krouzky.ORM.Database.DTO
-{
-    #region UsingRegion
+﻿#region UsingRegion
 
-    using System;
-    using System.Collections.ObjectModel;
-    using Krouzky.ORM.Database.DAO;
+using System;
+using System.Collections.ObjectModel;
+
+#endregion
+
+namespace Krouzky.ORM.Database.DTO {
+    #region UsingRegion
 
     #endregion
 
-    public class DTO
-    {
-        public DTO(DAO dao)
-        {
+    public class DTO {
+        public DTO(DAO.DAO dao) {
             this.adresa = dao.adresaTable.Select(dao.db);
             this.denVTydnu = dao.denVTydnuTable.Select(dao.db);
             this.hodinovaMzda = dao.hodinovaMzdaTable.Select(dao.db);
@@ -27,45 +27,21 @@
 
             this.print();
 
-            foreach (Connectable conn in this.lektor)
-            {
-                conn.connectObjects();
-            }
+            foreach (Connectable conn in this.lektor) conn.connectObjects();
 
-            foreach (Connectable conn in this.hodinovaMzda)
-            {
-                conn.connectObjects();
-            }
+            foreach (Connectable conn in this.hodinovaMzda) conn.connectObjects();
 
-            foreach (Connectable conn in this.kalendar)
-            {
-                conn.connectObjects();
-            }
+            foreach (Connectable conn in this.kalendar) conn.connectObjects();
 
-            foreach (Connectable conn in this.konkretniKrouzek)
-            {
-                conn.connectObjects();
-            }
+            foreach (Connectable conn in this.konkretniKrouzek) conn.connectObjects();
 
-            foreach (Connectable conn in this.skola)
-            {
-                conn.connectObjects();
-            }
+            foreach (Connectable conn in this.skola) conn.connectObjects();
 
-            foreach (Connectable conn in this.kontaktniOsoba)
-            {
-                conn.connectObjects();
-            }
+            foreach (Connectable conn in this.kontaktniOsoba) conn.connectObjects();
 
-            foreach (Connectable conn in this.vyucujiciKrouzek)
-            {
-                conn.connectObjects();
-            }
+            foreach (Connectable conn in this.vyucujiciKrouzek) conn.connectObjects();
 
-            foreach (Connectable conn in this.krouzek)
-            {
-                conn.connectObjects();
-            }
+            foreach (Connectable conn in this.krouzek) conn.connectObjects();
         }
 
         public Collection<Adresa> adresa { get; }
@@ -81,12 +57,10 @@
         public Collection<Skola> skola { get; }
         public Collection<VyucujiciKrouzek> vyucujiciKrouzek { get; }
 
-        public void updateDTO()
-        {
+        public void updateDTO() {
         }
 
-        public void print()
-        {
+        public void print() {
             this.print(this.adresa);
             this.print(this.denVTydnu);
             this.print(this.hodinovaMzda);
@@ -101,13 +75,9 @@
             this.print(this.vyucujiciKrouzek);
         }
 
-        public void print<T>(Collection<T> col)
-        {
+        public void print<T>(Collection<T> col) {
             Console.WriteLine("----------{0}----------", typeof(T));
-            foreach (var v in col)
-            {
-                Console.WriteLine(v.ToString());
-            }
+            foreach (var v in col) Console.WriteLine(v.ToString());
         }
     }
 }

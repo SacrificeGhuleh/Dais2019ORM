@@ -1,15 +1,12 @@
-﻿namespace Krouzky.ORM.Tester
-{
+﻿namespace Krouzky.ORM.Tester {
     #region UsingRegion
 
     using System;
 
     #endregion
 
-    public class Program
-    {
-        private static void Main(string[] args)
-        {
+    public class Program {
+        private static void Main(string[] args) {
             /*
              *
              * PRO SPRAVNE OTESTOVANI VSECH FUNKCI JE TREBA RESETOVAT DATABAZI
@@ -35,6 +32,14 @@
             orm.promotePlannedToPassed(4, DateTime.Parse("2018-05-08"), false, 5);
             orm.getPlannedAndPassed(DateTime.Parse("2018-05-01"), DateTime.Parse("2018-05-20"),
                 DateTime.Parse("2018-05-15"));
+
+
+            var krouzky =
+                orm.getPlannedAndPassed(DateTime.Parse("2018-01-01"), DateTime.Parse("2019-04-20"), DateTime.Now);
+
+            /*foreach (var planned in krouzky.Item1) {
+                Console.WriteLine(ORM.InsertString(planned));
+            }*/
 
             Console.WriteLine("Prvni pokus o zvyseni mzdy");
             Console.WriteLine("Zvyseni mzdy: {0}", orm.salaryUpdate(4, DateTime.Parse("2018-05-05")));

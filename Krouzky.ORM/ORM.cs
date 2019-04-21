@@ -1,25 +1,24 @@
-﻿using System.Collections.Generic;
+﻿#region UsingRegion
+
+using System;
+using System.Collections.ObjectModel;
 using System.Data;
+using System.Data.SqlClient;
+using Krouzky.ORM.Database.DAO;
+using Krouzky.ORM.Database.DTO;
 
-namespace Krouzky.ORM
-{
+#endregion
+
+namespace Krouzky.ORM {
     #region UsingRegion
-
-    using System;
-    using System.Collections.ObjectModel;
-    using System.Data.SqlClient;
-    using Krouzky.ORM.Database.DAO;
-    using Krouzky.ORM.Database.DTO;
 
     #endregion
 
-    public class ORM
-    {
+    public class ORM {
         private static readonly Random random = new Random();
         private static ORM instance_;
 
-        private ORM()
-        {
+        private ORM() {
             this.dao = new DAO();
             this.dto = new DTO(this.dao);
         }
@@ -30,8 +29,7 @@ namespace Krouzky.ORM
         private DAO dao { get; }
 
 
-        public int calculateHoursInPeriod(DateTime obdobiOd, DateTime obdobiDo, int idLektor)
-        {
+        public int calculateHoursInPeriod(DateTime obdobiOd, DateTime obdobiDo, int idLektor) {
             Console.WriteLine("Funkce 3.5. Vypocet oducenych hodin v zadanem obdobi.");
             Console.WriteLine("\tOd:{0}", obdobiOd);
             Console.WriteLine("\tDo:{0}", obdobiDo);
@@ -89,8 +87,7 @@ namespace Krouzky.ORM
             return (int) Math.Ceiling(result);
         }
 
-        public int calculateHoursTotal(int idLektor)
-        {
+        public int calculateHoursTotal(int idLektor) {
             /*PROC_3_6_VYPOCET_HODIN_CELKEM(@P_IDOSOBA INTEGER,
             @PO_HODINCELKEM FLOAT OUT)*/
 
@@ -127,8 +124,7 @@ namespace Krouzky.ORM
             return (int) Math.Ceiling(result);
         }
 
-        public int calculateSalary(DateTime obdobiOd, DateTime obdobiDo, int idLektor)
-        {
+        public int calculateSalary(DateTime obdobiOd, DateTime obdobiDo, int idLektor) {
             /*
              * PROC_3_7_VYPOCET_PLATU(@P_OBDOBIOD DATE,
                                                  @P_OBDOBIDO DATE,
@@ -189,8 +185,7 @@ namespace Krouzky.ORM
         }
 
         public Tuple<Collection<KonkretniKrouzekPrototype>, Collection<KonkretniKrouzek>> getPlannedAndPassed(
-            DateTime datumOd, DateTime datumDo, DateTime aktualniDatum)
-        {
+            DateTime datumOd, DateTime datumDo, DateTime aktualniDatum) {
             /*
              * PROCEDURE PROC_6_5_ZOBRAZENI_KROUZKU(@P_DATUMOD DATE,
              *                                      @P_DATUMDO DATE,
@@ -245,30 +240,23 @@ namespace Krouzky.ORM
 
             SqlDataReader rdr = command.ExecuteReader();
 
-            while (rdr.Read())
-            {
+            while (rdr.Read()) {
                 Console.WriteLine("Datum: {0} ID: {1} Konkretni ID: {2} Probehly: {3}", rdr["ID"],
                     rdr["IDKONKRETNIKROUZEK"], rdr["DATUM"], rdr["PROBEHLY"]);
                 bool probehly = (bool) rdr["PROBEHLY"];
 
-                if (probehly)
-                {
+                if (probehly) {
                     KonkretniKrouzek k = null;
                     int idKonkretniKrouzek = (int) rdr["IDKONKRETNIKROUZEK"];
                     if (!KonkretniKrouzek.instances.ContainsKey(idKonkretniKrouzek))
-                    {
-                        dao.konkretniKrouzekTable.SelectOne(idKonkretniKrouzek, "@idKonkretniKrouzek", out k, db);
-                    }
+                        this.dao.konkretniKrouzekTable.SelectOne(idKonkretniKrouzek, "@idKonkretniKrouzek", out k, db);
                     else
-                    {
                         k = KonkretniKrouzek.instances[idKonkretniKrouzek];
-                    }
 
                     if (k != null)
                         krouzkyTuple.Item2.Add(k);
                 }
-                else
-                {
+                else {
                     int id = (int) rdr["ID"];
                     DateTime datum = (DateTime) rdr["DATUM"];
                     krouzkyTuple.Item1.Add(new KonkretniKrouzekPrototype(id, datum));
@@ -278,8 +266,7 @@ namespace Krouzky.ORM
             return krouzkyTuple;
         }
 
-        public bool promotePlannedToPassed(int idKrouzek, DateTime datum, bool zrusen, int pocetZaku)
-        {
+        public bool promotePlannedToPassed(int idKrouzek, DateTime datum, bool zrusen, int pocetZaku) {
             /*PROC_7_1_NAPLANOVANY_NA_PROBEHLY(@P_IDKROUZEK INTEGER,
                                                @P_DATUM DATE,
                                                @P_ZRUSEN BIT,
@@ -337,8 +324,7 @@ namespace Krouzky.ORM
             return ret == 0;
         }
 
-        public bool salaryUpdate(int idLektor, DateTime platnostOd)
-        {
+        public bool salaryUpdate(int idLektor, DateTime platnostOd) {
             /*PROC_9_4_ZVYSENI_MZDY_LEKTOROVI(@P_IDLEKTOR INTEGER, @P_PLATNOSTOD DATE)*/
 
             Console.WriteLine("Funkce 9.4. Zvyseni mzdy lektorovi");
@@ -972,18 +958,15 @@ namespace Krouzky.ORM
 //        }
 //
 //        
-        private static string InsertString(KonkretniKrouzekPrototype krouzek)
-        {
+        public static string InsertString(KonkretniKrouzekPrototype krouzek) {
             bool zrusen = false;
             int pocetZaku = 0;
             //Random random = new Random((int)DateTime.Now.Ticks);
-            if (random.Next(0, 50) == 25)
-            {
+            if (random.Next(0, 50) == 25) {
                 zrusen = true;
                 pocetZaku = 0;
             }
-            else
-            {
+            else {
                 pocetZaku = random.Next(3, 10);
             }
 

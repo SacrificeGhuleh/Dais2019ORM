@@ -1,19 +1,20 @@
-﻿namespace Krouzky.ORM.Database.DTO
-{
-    #region UsingRegion
+﻿#region UsingRegion
 
-    using System;
-    using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+
+#endregion
+
+namespace Krouzky.ORM.Database.DTO {
+    #region UsingRegion
 
     #endregion
 
-    public class Osoba
-    {
+    public class Osoba {
         public static Dictionary<int, Osoba> instances;
 
         public Osoba(int idOsoba, string jmeno, string prostredniJmeno, string prijmeni, string email,
-            string telefonPracovni, string telefonOsobni)
-        {
+            string telefonPracovni, string telefonOsobni) {
             this.idOsoba = idOsoba;
             this.jmeno = jmeno ?? throw new ArgumentNullException(nameof(jmeno));
             this.prostredniJmeno = prostredniJmeno; //?? throw new ArgumentNullException(nameof(prostredniJmeno));
@@ -22,10 +23,7 @@
             this.telefonPracovni = telefonPracovni; //?? throw new ArgumentNullException(nameof(telefonPracovni));
             this.telefonOsobni = telefonOsobni ?? throw new ArgumentNullException(nameof(telefonOsobni));
 
-            if (instances == null)
-            {
-                instances = new Dictionary<int, Osoba>();
-            }
+            if (instances == null) instances = new Dictionary<int, Osoba>();
 
             instances.Add(idOsoba, this);
         }
@@ -38,9 +36,11 @@
         public string telefonPracovni { get; set; }
         public string telefonOsobni { get; set; }
 
-        public override string ToString() => "<Osoba> idOsoba: " + this.idOsoba + " |jmeno: " + this.jmeno +
-                                             " |prostredniJmeno: " + this.prostredniJmeno + " |prijmeni: " +
-                                             this.prijmeni + " |email: " + this.email + " |telefonPracovni: " +
-                                             this.telefonPracovni + " |telefonOsobni: " + this.telefonOsobni;
+        public override string ToString() {
+            return "<Osoba> idOsoba: " + this.idOsoba + " |jmeno: " + this.jmeno +
+                   " |prostredniJmeno: " + this.prostredniJmeno + " |prijmeni: " +
+                   this.prijmeni + " |email: " + this.email + " |telefonPracovni: " +
+                   this.telefonPracovni + " |telefonOsobni: " + this.telefonOsobni;
+        }
     }
 }

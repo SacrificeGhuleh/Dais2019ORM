@@ -1,26 +1,24 @@
-﻿namespace Krouzky.ORM.Database.DTO
-{
-    #region UsingRegion
+﻿#region UsingRegion
 
-    using System.Collections.Generic;
+using System.Collections.Generic;
+
+#endregion
+
+namespace Krouzky.ORM.Database.DTO {
+    #region UsingRegion
 
     #endregion
 
-    public class VyucujiciKrouzek : Connectable
-    {
+    public class VyucujiciKrouzek : Connectable {
         public static Dictionary<int, VyucujiciKrouzek> instances;
 
-        public VyucujiciKrouzek(int idVyucujiciKrouzek, int idKrouzek, int idLektor, string popis)
-        {
+        public VyucujiciKrouzek(int idVyucujiciKrouzek, int idKrouzek, int idLektor, string popis) {
             this.idVyucujiciKrouzek = idVyucujiciKrouzek;
             this.idKrouzek = idKrouzek;
             this.idLektor = idLektor;
             this.popis = popis;
 
-            if (instances == null)
-            {
-                instances = new Dictionary<int, VyucujiciKrouzek>();
-            }
+            if (instances == null) instances = new Dictionary<int, VyucujiciKrouzek>();
 
             instances.Add(idVyucujiciKrouzek, this);
         }
@@ -33,21 +31,16 @@
         public Lektor lektor { get; set; }
         public Krouzek krouzek { get; set; }
 
-        public override void connectObjects()
-        {
-            if (Krouzek.instances != null)
-            {
-                this.krouzek = Krouzek.instances[this.idKrouzek];
-            }
+        public override void connectObjects() {
+            if (Krouzek.instances != null) this.krouzek = Krouzek.instances[this.idKrouzek];
 
-            if (Lektor.instances != null)
-            {
-                this.lektor = Lektor.instances[this.idLektor];
-            }
+            if (Lektor.instances != null) this.lektor = Lektor.instances[this.idLektor];
         }
 
-        public override string ToString() => "<VyucujiciKrouzek> idVyucujiciKrouzek: " + this.idVyucujiciKrouzek +
-                                             " |idKrouzek: " + this.idKrouzek + " |idLektor: " + this.idLektor +
-                                             " |popis: " + this.popis;
+        public override string ToString() {
+            return "<VyucujiciKrouzek> idVyucujiciKrouzek: " + this.idVyucujiciKrouzek +
+                   " |idKrouzek: " + this.idKrouzek + " |idLektor: " + this.idLektor +
+                   " |popis: " + this.popis;
+        }
     }
 }
