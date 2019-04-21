@@ -321,7 +321,7 @@ namespace Krouzky.ORM {
 
 
             Console.WriteLine("\tnavratova hodnoda:{0}", ret);
-            return ret == 0;
+            return ret >= 0;
         }
 
         public bool salaryUpdate(int idLektor, DateTime platnostOd) {
@@ -358,7 +358,7 @@ namespace Krouzky.ORM {
             int ret = db.ExecuteNonQuery(command);
 
             Console.WriteLine("\tnavratova hodnoda:{0}", ret);
-            return ret == 0;
+            return ret >= 0;
         }
 
         /**************************************************************************************************/

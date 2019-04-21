@@ -54,17 +54,31 @@ BEGIN
             FETCH NEXT FROM C_CURS_KROUZKY INTO @V_KROUZEK_IDKROUZEK,@V_KROUZEK_IDPRAVIDELNOST;
             WHILE @@FETCH_STATUS = 0
             BEGIN
-                IF (@V_KROUZEK_IDPRAVIDELNOST = 0 OR @V_KROUZEK_IDPRAVIDELNOST = 1)
+                --IF (@V_KROUZEK_IDPRAVIDELNOST = 0 OR @V_KROUZEK_IDPRAVIDELNOST = 1)
+                --BEGIN
+                IF ((@V_KROUZEK_IDPRAVIDELNOST = 0 AND @V_KALENDAR_SUDY = 0) OR
+                    (@V_KROUZEK_IDPRAVIDELNOST = 1 AND @V_KALENDAR_SUDY = 1))
                     BEGIN
-                        IF ((@V_KROUZEK_IDPRAVIDELNOST = 0 AND @V_KALENDAR_SUDY = 0) OR
-                            (@V_KROUZEK_IDPRAVIDELNOST = 1 AND @V_KALENDAR_SUDY = 1))
-                            BEGIN
-                                --PRINT 'Nespravna pravidelnost'
-                                FETCH NEXT FROM C_CURS_KROUZKY INTO @V_KROUZEK_IDKROUZEK,@V_KROUZEK_IDPRAVIDELNOST;
-                                CONTINUE;
-                            END
+                        --PRINT 'Nespravna pravidelnost'
+                        FETCH NEXT FROM C_CURS_KROUZKY INTO @V_KROUZEK_IDKROUZEK,@V_KROUZEK_IDPRAVIDELNOST;
+                        CONTINUE;
+                    END
 
-                        IF (datediff(DAY, @V_KALENDAR_DATUM, @P_AKTUALNIDATUM) < 0)
+                IF (datediff(DAY, @V_KALENDAR_DATUM, @P_AKTUALNIDATUM) < 0)
+                    BEGIN
+                        PRINT cast(@V_KALENDAR_DATUM AS VARCHAR) + ' Naplanovany krouzek: ' +
+                              str(@V_KROUZEK_IDKROUZEK)
+                        INSERT @V_RET_TABLE VALUES (@V_KROUZEK_IDKROUZEK, @V_KALENDAR_DATUM, NULL, 0);
+                        --zobrazit jako naplanovany
+                    END
+                ELSE
+                    BEGIN
+                        SELECT @V_POCET = count(*)
+                        FROM PROJEKT.KONKRETNIKROUZEK
+                        WHERE KONKRETNIKROUZEK.IDKROUZEK = @V_KROUZEK_IDKROUZEK
+                          AND KONKRETNIKROUZEK.DATUM = @V_KALENDAR_DATUM
+
+                        IF (@V_POCET = 0)
                             BEGIN
                                 PRINT cast(@V_KALENDAR_DATUM AS VARCHAR) + ' Naplanovany krouzek: ' +
                                       str(@V_KROUZEK_IDKROUZEK)
@@ -73,37 +87,23 @@ BEGIN
                             END
                         ELSE
                             BEGIN
-                                SELECT @V_POCET = count(*)
+
+                                PRINT cast(@V_KALENDAR_DATUM AS VARCHAR) + ' Probehly krouzek: ' +
+                                      str(@V_KROUZEK_IDKROUZEK)
+
+                                SELECT @V_KROUZEK_IDKONKRETNIKROUZEK = IDKONKRETNIKROUZEK
                                 FROM PROJEKT.KONKRETNIKROUZEK
                                 WHERE KONKRETNIKROUZEK.IDKROUZEK = @V_KROUZEK_IDKROUZEK
                                   AND KONKRETNIKROUZEK.DATUM = @V_KALENDAR_DATUM
 
-                                IF (@V_POCET = 0)
-                                    BEGIN
-                                        PRINT cast(@V_KALENDAR_DATUM AS VARCHAR) + ' Naplanovany krouzek: ' +
-                                              str(@V_KROUZEK_IDKROUZEK)
-                                        INSERT @V_RET_TABLE VALUES (@V_KROUZEK_IDKROUZEK, @V_KALENDAR_DATUM, NULL, 0);
-                                        --zobrazit jako naplanovany
-                                    END
-                                ELSE
-                                    BEGIN
-
-                                        PRINT cast(@V_KALENDAR_DATUM AS VARCHAR) + ' Probehly krouzek: ' +
-                                              str(@V_KROUZEK_IDKROUZEK)
-
-                                        SELECT @V_KROUZEK_IDKONKRETNIKROUZEK = IDKONKRETNIKROUZEK
-                                        FROM PROJEKT.KONKRETNIKROUZEK
-                                        WHERE KONKRETNIKROUZEK.IDKROUZEK = @V_KROUZEK_IDKROUZEK
-                                          AND KONKRETNIKROUZEK.DATUM = @V_KALENDAR_DATUM
-
-                                        INSERT @V_RET_TABLE
-                                        VALUES (@V_KROUZEK_IDKROUZEK, @V_KALENDAR_DATUM, @V_KROUZEK_IDKONKRETNIKROUZEK,
-                                                1);
-                                        --zobrazit jako probehly
-                                    END
-
+                                INSERT @V_RET_TABLE
+                                VALUES (@V_KROUZEK_IDKROUZEK, @V_KALENDAR_DATUM, @V_KROUZEK_IDKONKRETNIKROUZEK,
+                                        1);
+                                --zobrazit jako probehly
                             END
+
                     END
+                --END
 
                 FETCH NEXT FROM C_CURS_KROUZKY INTO @V_KROUZEK_IDKROUZEK,@V_KROUZEK_IDPRAVIDELNOST;
             END

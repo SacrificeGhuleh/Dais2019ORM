@@ -69,7 +69,7 @@
             catch (Exception e) {
                 Console.WriteLine(e);
             }
-//
+//            /*Generovani konkretnich krouzku*/
 //            try {
 //                var krouzky =
 //                    orm.getPlannedAndPassed(DateTime.Parse("2018-01-01"), DateTime.Parse("2019-04-20"), DateTime.Now);
@@ -83,7 +83,7 @@
 
             try {
                 Console.WriteLine("Prvni pokus o zvyseni mzdy");
-                Console.WriteLine("Zvyseni mzdy: {0}", orm.salaryUpdate(4, DateTime.Today));
+                Console.WriteLine("Zvyseni mzdy: {0}", orm.salaryUpdate(0, DateTime.Today));
             }
             catch (Exception e) {
                 Console.WriteLine(e);
@@ -93,7 +93,7 @@
 
             try {
                 Console.WriteLine("Druhy pokus o zvyseni mzdy");
-                Console.WriteLine("Zvyseni mzdy: {0}", orm.salaryUpdate(4, DateTime.Today));
+                Console.WriteLine("Zvyseni mzdy: {0}", orm.salaryUpdate(0, DateTime.Today));
             }
             catch (Exception e) {
                 Console.WriteLine(e);
