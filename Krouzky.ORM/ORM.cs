@@ -35,7 +35,7 @@ namespace Krouzky.ORM {
             Console.WriteLine("\tDo:{0}", obdobiDo);
             Console.WriteLine("\tIdLektor:{0}", idLektor);
 
-            /*PROC_3_5_VYPOCET_HODIN_OBDOBI(@P_OBDOBIOD DATE,
+            /*PROJEKT.PROC_3_5_VYPOCET_HODIN_OBDOBI(@P_OBDOBIOD DATE,
                                             @P_OBDOBIDO DATE,
                                             @P_IDOSOBA INTEGER,
                                             @PO_HODINCELKEM FLOAT OUT)*/
@@ -43,7 +43,7 @@ namespace Krouzky.ORM {
             Database.Database db = this.dao.db;
 
             // 1.  create a command object identifying the stored procedure
-            SqlCommand command = db.CreateCommand("PROC_3_5_VYPOCET_HODIN_OBDOBI");
+            SqlCommand command = db.CreateCommand("PROJEKT.PROC_3_5_VYPOCET_HODIN_OBDOBI");
 
             // 2. set the command object so it knows to execute a stored procedure
             command.CommandType = CommandType.StoredProcedure;
@@ -88,7 +88,7 @@ namespace Krouzky.ORM {
         }
 
         public int calculateHoursTotal(int idLektor) {
-            /*PROC_3_6_VYPOCET_HODIN_CELKEM(@P_IDOSOBA INTEGER,
+            /*PROJEKT.PROC_3_6_VYPOCET_HODIN_CELKEM(@P_IDOSOBA INTEGER,
             @PO_HODINCELKEM FLOAT OUT)*/
 
             Console.WriteLine("Funkce 3.6. Vypocet oducenych hodin celkem.");
@@ -97,7 +97,7 @@ namespace Krouzky.ORM {
             Database.Database db = this.dao.db;
 
             // 1.  create a command object identifying the stored procedure
-            SqlCommand command = db.CreateCommand("PROC_3_6_VYPOCET_HODIN_CELKEM");
+            SqlCommand command = db.CreateCommand("PROJEKT.PROC_3_6_VYPOCET_HODIN_CELKEM");
 
             // 2. set the command object so it knows to execute a stored procedure
             command.CommandType = CommandType.StoredProcedure;
@@ -126,7 +126,7 @@ namespace Krouzky.ORM {
 
         public int calculateSalary(DateTime obdobiOd, DateTime obdobiDo, int idLektor) {
             /*
-             * PROC_3_7_VYPOCET_PLATU(@P_OBDOBIOD DATE,
+             * PROJEKT.PROC_3_7_VYPOCET_PLATU(@P_OBDOBIOD DATE,
                                                  @P_OBDOBIDO DATE,
                                                  @P_IDOSOBA INTEGER,
                                                  @PO_MESICNIPLAT FLOAT OUT)
@@ -140,7 +140,7 @@ namespace Krouzky.ORM {
             Database.Database db = this.dao.db;
 
             // 1.  create a command object identifying the stored procedure
-            SqlCommand command = db.CreateCommand("PROC_3_7_VYPOCET_PLATU");
+            SqlCommand command = db.CreateCommand("PROJEKT.PROC_3_7_VYPOCET_PLATU");
 
             // 2. set the command object so it knows to execute a stored procedure
             command.CommandType = CommandType.StoredProcedure;
@@ -187,7 +187,7 @@ namespace Krouzky.ORM {
         public Tuple<Collection<KonkretniKrouzekPrototype>, Collection<KonkretniKrouzek>> getPlannedAndPassed(
             DateTime datumOd, DateTime datumDo, DateTime aktualniDatum) {
             /*
-             * PROCEDURE PROC_6_5_ZOBRAZENI_KROUZKU(@P_DATUMOD DATE,
+             * PROCEDURE PROJEKT.PROC_6_5_ZOBRAZENI_KROUZKU(@P_DATUMOD DATE,
              *                                      @P_DATUMDO DATE,
              *                                      @P_AKTUALNIDATUM DATE)
              */
@@ -207,7 +207,7 @@ namespace Krouzky.ORM {
             Database.Database db = this.dao.db;
 
             // 1.  create a command object identifying the stored procedure
-            SqlCommand command = db.CreateCommand("PROC_6_5_ZOBRAZENI_KROUZKU");
+            SqlCommand command = db.CreateCommand("PROJEKT.PROC_6_5_ZOBRAZENI_KROUZKU");
 
             // 2. set the command object so it knows to execute a stored procedure
             command.CommandType = CommandType.StoredProcedure;
@@ -267,7 +267,7 @@ namespace Krouzky.ORM {
         }
 
         public bool promotePlannedToPassed(int idKrouzek, DateTime datum, bool zrusen, int pocetZaku) {
-            /*PROC_7_1_NAPLANOVANY_NA_PROBEHLY(@P_IDKROUZEK INTEGER,
+            /*PROJEKT.PROC_7_1_NAPLANOVANY_NA_PROBEHLY(@P_IDKROUZEK INTEGER,
                                                @P_DATUM DATE,
                                                @P_ZRUSEN BIT,
                                                @P_POCETZAKU INT)
@@ -281,7 +281,7 @@ namespace Krouzky.ORM {
             Database.Database db = this.dao.db;
 
             // 1.  create a command object identifying the stored procedure
-            SqlCommand command = db.CreateCommand("PROC_7_1_NAPLANOVANY_NA_PROBEHLY");
+            SqlCommand command = db.CreateCommand("PROJEKT.PROC_7_1_NAPLANOVANY_NA_PROBEHLY");
 
             // 2. set the command object so it knows to execute a stored procedure
             command.CommandType = CommandType.StoredProcedure;
@@ -325,7 +325,7 @@ namespace Krouzky.ORM {
         }
 
         public bool salaryUpdate(int idLektor, DateTime platnostOd) {
-            /*PROC_9_4_ZVYSENI_MZDY_LEKTOROVI(@P_IDLEKTOR INTEGER, @P_PLATNOSTOD DATE)*/
+            /*PROJEKT.PROC_9_4_ZVYSENI_MZDY_LEKTOROVI(@P_IDLEKTOR INTEGER, @P_PLATNOSTOD DATE)*/
 
             Console.WriteLine("Funkce 9.4. Zvyseni mzdy lektorovi");
             Console.WriteLine("\tidLektor:{0}", idLektor);
@@ -335,7 +335,7 @@ namespace Krouzky.ORM {
             Database.Database db = this.dao.db;
 
             // 1.  create a command object identifying the stored procedure
-            SqlCommand command = db.CreateCommand("PROC_9_4_ZVYSENI_MZDY_LEKTOROVI");
+            SqlCommand command = db.CreateCommand("PROJEKT.PROC_9_4_ZVYSENI_MZDY_LEKTOROVI");
 
             // 2. set the command object so it knows to execute a stored procedure
             command.CommandType = CommandType.StoredProcedure;
