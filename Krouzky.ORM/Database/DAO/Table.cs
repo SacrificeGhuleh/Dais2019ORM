@@ -12,21 +12,23 @@ namespace Krouzky.ORM.Database.DAO {
     #endregion
 
     public abstract class Table<T> {
-        private readonly string _sqlDeleteId;
-        private readonly string _sqlInsert;
-        private readonly string _sqlSelect;
-        private readonly string _sqlSelectId;
-        private readonly string _sqlUpdate;
-        private readonly string _tableName;
+        protected readonly string _sqlDeleteId;
+        protected readonly string _sqlInsert;
+        protected readonly string _sqlSelect;
+        protected readonly string _sqlSelectId;
+        protected readonly string _sqlUpdate;
+        protected readonly string _tableName;
+        protected readonly string sqlSelectOneParamName_;
 
         protected Table(string tableName, string sqlSelect, string sqlSelectId, string sqlInsert, string sqlUpdate,
-            string sqlDeleteId) {
+            string sqlDeleteId, string sqlSelectOneParamName) {
             this._tableName = tableName ?? throw new ArgumentNullException(nameof(tableName));
             this._sqlSelect = sqlSelect ?? throw new ArgumentNullException(nameof(sqlSelect));
             this._sqlSelectId = sqlSelectId ?? throw new ArgumentNullException(nameof(sqlSelectId));
             this._sqlInsert = sqlInsert ?? throw new ArgumentNullException(nameof(sqlInsert));
             this._sqlUpdate = sqlUpdate ?? throw new ArgumentNullException(nameof(sqlUpdate));
             this._sqlDeleteId = sqlDeleteId ?? throw new ArgumentNullException(nameof(sqlDeleteId));
+            this.sqlSelectOneParamName_ = sqlSelectOneParamName ?? throw new ArgumentNullException(nameof(sqlDeleteId));
         }
 
         public int Insert(T dbObject, Database pDb = null) {
@@ -38,14 +40,28 @@ namespace Krouzky.ORM.Database.DAO {
             else {
                 db = pDb;
             }
-
+            db.BeginTransaction();
             SqlCommand command = db.CreateCommand(this._sqlInsert);
             if (command == null) return -1;
 
             this.PrepareCommand(command, dbObject);
             int ret = db.ExecuteNonQuery(command);
 
+            //ret = db.ExecuteNonQuery(db.CreateCommand("SELECT SCOPE_IDENTITY()"));
+            //ret = id;
+
+            //SqlDataReader reader = db.CreateCommand("SELECT SCOPE_IDENTITY() as id").ExecuteReader();
+            SqlDataReader reader = db.CreateCommand("select @@identity as id").ExecuteReader();
+
+            while (reader.Read()) {
+                    Console.WriteLine(reader.GetDecimal(0));
+                    ret = (int) reader.GetDecimal(0);
+            }
+
+            reader.Close();
+            db.EndTransaction();
             if (pDb == null) db.Close();
+
 
             return ret;
         }
@@ -113,6 +129,10 @@ namespace Krouzky.ORM.Database.DAO {
             return result;
         }
 
+        public bool SelectOne(int idDbObject, out T result, Database pDb = null) {
+            return SelectOne(idDbObject, sqlSelectOneParamName_, out result, pDb);
+        }
+
         public bool SelectOne(int idDbObject, string parameterName, out T result, Database pDb = null) {
             bool res = false;
             Database db;
@@ -135,12 +155,14 @@ namespace Krouzky.ORM.Database.DAO {
                 res = true;
             }
             else {
-                result = (T) new object();
+                result = default(T); //(T) new object();
             }
 
             reader.Close();
             if (pDb == null) db.Close();
 
+            //Hlavne pro debug
+            if (!res) throw new Exception("Objekt v tabulce neexistuje");
             return res;
         }
 

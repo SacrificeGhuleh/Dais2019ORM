@@ -11,7 +11,7 @@ namespace Krouzky.ORM.Database.DTO {
     #endregion
 
     public class Adresa {
-        public static Dictionary<int, Adresa> instances;
+        //public static Dictionary<int, Adresa> instances;
 
         public Adresa(int idAdresa, string ulice, int cisloPopisne, string mesto, string stat, int? psc) {
             this.idAdresa = idAdresa;
@@ -21,9 +21,9 @@ namespace Krouzky.ORM.Database.DTO {
             this.stat = stat ?? throw new ArgumentNullException(nameof(stat));
             this.psc = psc;
 
-            if (instances == null) instances = new Dictionary<int, Adresa>();
+            //if (instances == null) instances = new Dictionary<int, Adresa>();
 
-            instances.Add(idAdresa, this);
+            //instances.Add(idAdresa, this);
         }
 
         public int idAdresa { get; set; }

@@ -11,10 +11,10 @@ namespace Krouzky.ORM.Database.DTO {
     #endregion
 
     public class Osoba {
-        public static Dictionary<int, Osoba> instances;
+        //public static Dictionary<int, Osoba> instances;
 
-        public Osoba(int idOsoba, string jmeno, string prostredniJmeno, string prijmeni, string email,
-            string telefonPracovni, string telefonOsobni) {
+        public Osoba(int idOsoba = -1, string jmeno = "", string prostredniJmeno = "", string prijmeni = "", string email = "",
+            string telefonPracovni = "", string telefonOsobni = "") {
             this.idOsoba = idOsoba;
             this.jmeno = jmeno ?? throw new ArgumentNullException(nameof(jmeno));
             this.prostredniJmeno = prostredniJmeno; //?? throw new ArgumentNullException(nameof(prostredniJmeno));
@@ -23,9 +23,9 @@ namespace Krouzky.ORM.Database.DTO {
             this.telefonPracovni = telefonPracovni; //?? throw new ArgumentNullException(nameof(telefonPracovni));
             this.telefonOsobni = telefonOsobni ?? throw new ArgumentNullException(nameof(telefonOsobni));
 
-            if (instances == null) instances = new Dictionary<int, Osoba>();
+            /*if (instances == null) instances = new Dictionary<int, Osoba>();
 
-            instances.Add(idOsoba, this);
+            instances.Add(idOsoba, this);*/
         }
 
         public int idOsoba { get; set; }

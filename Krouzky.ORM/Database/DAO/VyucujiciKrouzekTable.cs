@@ -17,7 +17,8 @@ namespace Krouzky.ORM.Database.DAO {
             "SELECT * FROM projekt.VyucujiciKrouzek WHERE idVyucujiciKrouzek = @idVyucujiciKrouzek", /*select s primarnim klicem*/
             "INSERT INTO projekt.VyucujiciKrouzek VALUES (@idKrouzek, @idLektor, @popis)" /*Insert*/,
             "UPDATE projekt.VyucujiciKrouzek SET idKrouzek = @idKrouzek, idLektor = @idLektor, popis = @popis WHERE idVyucujiciKrouzek = @idVyucujiciKrouzek" /*Update*/,
-            "DELETE FROM projekt.VyucujiciKrouzek WHERE idVyucujiciKrouzek = @idVyucujiciKrouzek" /*Delete*/
+            "DELETE FROM projekt.VyucujiciKrouzek WHERE idVyucujiciKrouzek = @idVyucujiciKrouzek" /*Delete*/,
+            "@idVyucujiciKrouzek" /*select by id nazev parametru*/
         ) {
         }
 

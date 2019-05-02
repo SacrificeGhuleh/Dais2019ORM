@@ -15,7 +15,8 @@ namespace Krouzky.ORM.Database.DAO {
         public DenVTydnuTable() : base("projekt.DenVTydnu", /*Jmeno tabulky*/
             "SELECT * FROM projekt.DenVTydnu", /*jednoduchy select*/
             "SELECT * FROM projekt.DenVTydnu WHERE idDenVTydnu = @idDenVTydnu", /*select s primarnim klicem*/
-            "" /*Insert*/, "" /*Update*/, "" /*Delete*/
+            "" /*Insert*/, "" /*Update*/, "" /*Delete*/,
+            "@idDenVTydnu" /*select by id nazev parametru*/
         ) {
         }
 

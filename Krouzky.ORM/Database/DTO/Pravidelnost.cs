@@ -11,15 +11,15 @@ namespace Krouzky.ORM.Database.DTO {
     #endregion
 
     public class Pravidelnost {
-        public static Dictionary<int, Pravidelnost> instances;
+        //public static Dictionary<int, Pravidelnost> instances;
 
         public Pravidelnost(int idPravidelnost, string popis) {
             this.idPravidelnost = idPravidelnost;
             this.popis = popis ?? throw new ArgumentNullException(nameof(popis));
 
-            if (instances == null) instances = new Dictionary<int, Pravidelnost>();
+            /*if (instances == null) instances = new Dictionary<int, Pravidelnost>();
 
-            instances.Add(idPravidelnost, this);
+            instances.Add(idPravidelnost, this);*/
         }
 
         public int idPravidelnost { get; set; }

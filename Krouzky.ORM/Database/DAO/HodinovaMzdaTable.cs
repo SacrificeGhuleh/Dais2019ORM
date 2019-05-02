@@ -18,7 +18,8 @@ namespace Krouzky.ORM.Database.DAO {
             "SELECT * FROM projekt.HodinovaMzda WHERE idHodinovaMzda = @idHodinovaMzda", /*select s primarnim klicem*/
             "INSERT INTO projekt.HodinovaMzda VALUES (@idLektor, @mzda, @platnostOd, @platnostDo)" /*Insert*/,
             "UPDATE projekt.HodinovaMzda SET idLektor = @idLektor, mzda = @mzda, platnostOd = @platnostOd, platnostDo = @platnostDo WHERE idHodinovaMzda = @idHodinovaMzda" /*Update*/,
-            "DELETE FROM projekt.HodinovaMzda WHERE idHodinovaMzda=@idHodinovaMzda" /*Delete*/
+            "DELETE FROM projekt.HodinovaMzda WHERE idHodinovaMzda=@idHodinovaMzda" /*Delete*/,
+            "@idHodinovaMzda" /*select by id nazev parametru*/
         ) {
         }
 

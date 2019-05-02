@@ -10,8 +10,8 @@ namespace Krouzky.ORM.Database.DTO {
 
     #endregion
 
-    public class HodinovaMzda : Connectable {
-        public static Dictionary<int, HodinovaMzda> instances;
+    public class HodinovaMzda /*: Connectable*/ {
+        //public static Dictionary<int, HodinovaMzda> instances;
 
         public HodinovaMzda(int idHodinovaMzda, int idLektor, int mzda, DateTime platnostOd,
             DateTime? platnostDo = null) {
@@ -21,9 +21,9 @@ namespace Krouzky.ORM.Database.DTO {
             this.platnostOd = platnostOd;
             this.platnostDo = platnostDo;
 
-            if (instances == null) instances = new Dictionary<int, HodinovaMzda>();
+            //if (instances == null) instances = new Dictionary<int, HodinovaMzda>();
 
-            instances.Add(idHodinovaMzda, this);
+            //instances.Add(idHodinovaMzda, this);
         }
 
         public Lektor lektor { get; set; }
@@ -34,9 +34,9 @@ namespace Krouzky.ORM.Database.DTO {
         public DateTime platnostOd { get; set; }
         public DateTime? platnostDo { get; set; }
 
-        public override void connectObjects() {
-            if (Lektor.instances != null) this.lektor = Lektor.instances[this.idLektor];
-        }
+        //public override void connectObjects() {
+        //    if (Lektor.instances != null) this.lektor = Lektor.instances[this.idLektor];
+        //}
 
         public override string ToString() {
             return "<HodinovaMzda> idHodinovaMzda: " + this.idHodinovaMzda + " |idLektor: " +

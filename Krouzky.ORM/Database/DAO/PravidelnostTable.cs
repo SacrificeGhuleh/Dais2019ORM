@@ -15,7 +15,8 @@ namespace Krouzky.ORM.Database.DAO {
         public PravidelnostTable() : base("projekt.Pravidelnost", /*Jmeno tabulky*/
             "SELECT * FROM projekt.Pravidelnost", /*jednoduchy select*/
             "SELECT * FROM projekt.Pravidelnost WHERE idPravidelnost = @idPravidelnost", /*select s primarnim klicem*/
-            "" /*Insert*/, "" /*Update*/, "" /*Delete*/
+            "" /*Insert*/, "" /*Update*/, "" /*Delete*/,
+            "@idPravidelnost" /*select by id nazev parametru*/
         ) {
         }
 

@@ -127,3 +127,10 @@ BEGIN
                   @P_DATUMDO,
                   @P_AKTUALNIDATUM
 END
+
+select * from projekt.osoba
+INSERT INTO PROJEKT.OSOBA(JMENO, PRIJMENI, EMAIL, TELEFONPRACOVNI)
+    VALUES ('dude', 'dude', 'dueedeude', 'duuuude');
+SELECT SCOPE_IDENTITY() as  id
+
+select @@identity as id

@@ -15,6 +15,10 @@
 
             var orm = ORM.instance;
 
+            /*
+            //Vypis databaze
+            orm.dto.print();
+            */
             try {
                 orm.calculateHoursInPeriod(DateTime.Parse("2019-01-01"), DateTime.Parse("2019-01-31"), 0);
             }

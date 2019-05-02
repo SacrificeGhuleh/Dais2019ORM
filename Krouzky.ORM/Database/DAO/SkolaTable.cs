@@ -17,7 +17,8 @@ namespace Krouzky.ORM.Database.DAO {
             "SELECT * FROM projekt.Skola WHERE idSkola = @idSkola", /*select s primarnim klicem*/
             "INSERT INTO projekt.Skola VALUES (@idAdresa)" /*Insert*/,
             "UPDATE projekt.Skola SET idAdresa = @idAdresa WHERE idSkola = @idSkola" /*Update*/,
-            "DELETE FROM projekt.Skola WHERE idSkola=@idSkola" /*Delete*/
+            "DELETE FROM projekt.Skola WHERE idSkola=@idSkola" /*Delete*/,
+            "@idSkola" /*select by id nazev parametru*/
         ) {
         }
 
